@@ -5,14 +5,14 @@
   "homepage": "https://github.com/VladyslavKshenin/goit-js-hw-11",
   "scripts": {
     "start": "parcel src/*.html",
-    "build":  "parcel build src/*.html --public-url /parcel-project-template/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/goitacademy/parcel-project-template.git"
   },
   "keywords": [],
-  "author": "Vladyslav Kshenin <legendary.1bk@gmail.com>",
+  "author": "Vladys lavKshenin <legendary.1bk@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
