@@ -100,7 +100,7 @@ const handleSuccess = function (data) {
   if (searchQueries.length === 0) {
     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   } else {
-    Notiflix.Notify.success(`Hooray! We found ${data.hits.length} images.`);
+    Notiflix.Notify.success(`Hooray! We found new ${data.hits.length} images.`);
   }
   renderCard(searchQueries);
 
