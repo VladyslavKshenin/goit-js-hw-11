@@ -139,7 +139,8 @@ const handleSubmit = async function (e) {
 refs.form.addEventListener('submit', handleSubmit);
 
 window.addEventListener('scroll', async () => {
-  if (
+    if (
+      !this.isLoading &&
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
   ) {
     try {
