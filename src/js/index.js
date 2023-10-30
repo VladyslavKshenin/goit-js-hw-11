@@ -131,6 +131,5 @@ const handleLoadMore = async function () {
     Notiflix.Notify.failure("Failed to load more images. Please try again.");
   }
 };
-
 refs.form.addEventListener('submit', handleSubmit);
 refs.loadMoreBtn.addEventListener('click', handleLoadMore);
