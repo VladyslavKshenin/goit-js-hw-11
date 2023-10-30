@@ -11,11 +11,14 @@ class ApiService {
     this.searchQuery = '';
     this.currentPage = 1;
     this.perPage = 40;
-      this.isLoading = false;
+    this.isLoading = false;
   }
 
-    async getData() {
-        this.isLoading = true;
+  async getData() {
+    if (this.isLoading) return;
+    
+    this.isLoading = true;
+
     try {
       const response = await axios.get(URL, {
         params: {
@@ -29,15 +32,14 @@ class ApiService {
         },
       });
 
-        this.currentPage += 1;
-         this.isLoading = false;
+      this.currentPage += 1;
+      this.isLoading = false;
       return response.data;
     } catch (error) {
-         this.isLoading = false;
+      this.isLoading = false;
       console.log(error.message);
       throw error;
     }
-    
   }
 
   resetPage() {
@@ -80,7 +82,7 @@ const renderCard = function (dataArr) {
           <p class="info-item">
              <b>${item.views} Views</b>
           </p>
-          <p class "info-item">
+          <p class="info-item">
             <b>${item.comments} Comments</b>
           </p>
           <p class="info-item">
@@ -101,6 +103,19 @@ const handleSuccess = function (data) {
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   }
   renderCard(searchQueries);
+
+  scrollToNextGroup();
+};
+
+const scrollToNextGroup = () => {
+  const { height: cardHeight } = document
+    .querySelector(".photo-card")
+    .getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: "smooth",
+  });
 };
 
 const handleSubmit = async function (e) {
@@ -124,10 +139,8 @@ const handleSubmit = async function (e) {
 refs.form.addEventListener('submit', handleSubmit);
 
 window.addEventListener('scroll', async () => {
-    if (
-      !isLoading &&  
+  if (
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
-    
   ) {
     try {
       const data = await apiImages.getData();
