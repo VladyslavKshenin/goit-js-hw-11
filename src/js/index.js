@@ -61,7 +61,7 @@ const refs = {
   sort: document.querySelector('.sort-btn'),
 };
 
-refs.loadMoreBtn.style.display = 'block';
+refs.loadMoreBtn.style.display = 'none';
 const apiImages = new ApiService();
 
 const renderCard = function (dataArr) {
@@ -94,10 +94,12 @@ const renderCard = function (dataArr) {
 const handleSuccess = function (data) {
   const searchQueries = data.hits;
   if (searchQueries.length === 0) {
-    refs.loadMoreBtn.style.display = 'none'; 
+    refs.loadMoreBtn.style.display = 'none';
     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   } else {
-    refs.loadMoreBtn.style.display = 'block';
+    if (apiImages.currentPage === 1) {
+      refs.loadMoreBtn.style.display = 'block';
+    }
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   }
   renderCard(searchQueries);
@@ -125,6 +127,7 @@ const handleLoadMore = async function () {
     const data = await apiImages.getData();
     handleSuccess(data);
   } catch (error) {
+    refs.loadMoreBtn.style.display = 'none'; 
     Notiflix.Notify.failure("Failed to load more images. Please try again.");
   }
 };
