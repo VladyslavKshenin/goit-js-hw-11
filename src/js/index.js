@@ -61,7 +61,7 @@ const refs = {
   sort: document.querySelector('.sort-btn'),
 };
 
-refs.loadMoreBtn.style.display = 'none';
+refs.loadMoreBtn.style.display = 'block';
 const apiImages = new ApiService();
 
 const renderCard = function (dataArr) {
@@ -93,20 +93,15 @@ const renderCard = function (dataArr) {
 
 const handleSuccess = function (data) {
   const searchQueries = data.hits;
-  if (searchQueries.length < apiImages.perPage) {
-    refs.loadMoreBtn.style.display = 'none';
-    if (searchQueries.length === 0) {
-      Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
-    } else {
-      Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    }
+  if (searchQueries.length === 0) {
+    refs.loadMoreBtn.style.display = 'none'; 
+    Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   } else {
     refs.loadMoreBtn.style.display = 'block';
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   }
   renderCard(searchQueries);
 };
-
 const handleSubmit = async function (e) {
   e.preventDefault();
   apiImages.resetPage();
