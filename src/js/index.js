@@ -11,9 +11,11 @@ class ApiService {
     this.searchQuery = '';
     this.currentPage = 1;
     this.perPage = 40;
+      this.isLoading = false;
   }
 
-  async getData() {
+    async getData() {
+        this.isLoading = true;
     try {
       const response = await axios.get(URL, {
         params: {
@@ -27,12 +29,15 @@ class ApiService {
         },
       });
 
-      this.currentPage += 1;
+        this.currentPage += 1;
+         this.isLoading = false;
       return response.data;
     } catch (error) {
+         this.isLoading = false;
       console.log(error.message);
       throw error;
     }
+    
   }
 
   resetPage() {
@@ -119,8 +124,10 @@ const handleSubmit = async function (e) {
 refs.form.addEventListener('submit', handleSubmit);
 
 window.addEventListener('scroll', async () => {
-  if (
+    if (
+      !isLoading &&  
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
+    
   ) {
     try {
       const data = await apiImages.getData();
