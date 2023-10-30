@@ -57,10 +57,8 @@ const lightbox = new SimpleLightbox('.photo-card a', {
 const refs = {
   form: document.querySelector('#search-form'),
   gallery: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
 };
 
-refs.loadMoreBtn.style.display = 'none';
 const apiImages = new ApiService();
 
 const renderCard = function (dataArr) {
@@ -93,16 +91,13 @@ const renderCard = function (dataArr) {
 const handleSuccess = function (data) {
   const searchQueries = data.hits;
   if (searchQueries.length === 0) {
-    refs.loadMoreBtn.style.display = 'none';
     Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   } else {
-    if (apiImages.currentPage === 1) {
-      refs.loadMoreBtn.style.display = 'block';
-    }
     Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
   }
   renderCard(searchQueries);
 };
+
 const handleSubmit = async function (e) {
   e.preventDefault();
   apiImages.resetPage();
@@ -121,14 +116,17 @@ const handleSubmit = async function (e) {
   }
 };
 
-const handleLoadMore = async function () {
-  try {
-    const data = await apiImages.getData();
-    handleSuccess(data);
-  } catch (error) {
-    refs.loadMoreBtn.style.display = 'none'; 
-    Notiflix.Notify.failure("Failed to load more images. Please try again.");
-  }
-};
 refs.form.addEventListener('submit', handleSubmit);
-refs.loadMoreBtn.addEventListener('click', handleLoadMore);
+
+window.addEventListener('scroll', async () => {
+  if (
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
+  ) {
+    try {
+      const data = await apiImages.getData();
+      handleSuccess(data);
+    } catch (error) {
+      Notiflix.Notify.failure("Failed to load more images. Please try again.");
+    }
+  }
+});
