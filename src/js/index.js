@@ -58,10 +58,9 @@ const refs = {
   form: document.querySelector('#search-form'),
   gallery: document.querySelector('.gallery'),
   loadMoreBtn: document.querySelector('.load-more'),
-  sort: document.querySelector('.sort-btn'),
 };
 
-refs.loadMoreBtn.style.display = 'block';
+refs.loadMoreBtn.style.display = 'none';
 const apiImages = new ApiService();
 
 const renderCard = function (dataArr) {
