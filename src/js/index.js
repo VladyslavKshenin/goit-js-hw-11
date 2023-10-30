@@ -140,7 +140,7 @@ refs.form.addEventListener('submit', handleSubmit);
 
 window.addEventListener('scroll', async () => {
     if (
-      !this.isLoading &&
+      !apiImages.isLoading &&
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 500
   ) {
     try {
