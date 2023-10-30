@@ -61,7 +61,7 @@ const refs = {
   sort: document.querySelector('.sort-btn'),
 };
 
-refs.loadMoreBtn.style.display = 'none';
+refs.loadMoreBtn.style.display = 'block';
 const apiImages = new ApiService();
 
 const renderCard = function (dataArr) {
