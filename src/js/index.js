@@ -104,19 +104,10 @@ const handleSuccess = function (data) {
   }
   renderCard(searchQueries);
 
-  scrollToNextGroup();
+
 };
 
-const scrollToNextGroup = () => {
-  const { height: cardHeight } = document
-    .querySelector(".photo-card")
-    .getBoundingClientRect();
 
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: "smooth",
-  });
-};
 
 const handleSubmit = async function (e) {
   e.preventDefault();
