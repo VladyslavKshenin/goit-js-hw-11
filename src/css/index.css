@@ -63,7 +63,7 @@ img {
     gap: 16px;
     grid-template-columns: repeat(3, 1fr);
 }
-.load-more{
+/* .load-more{
 cursor: pointer;
     background-color: #4D5AE5;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
@@ -84,9 +84,9 @@ cursor: pointer;
 .load-more:focus,
 .load-more:hover{
     background: #404BBF;
-}
-.footer{
+} */
+/* .footer{
     display: flex;
     align-items: center;
     flex-direction: column;
-}
+} */
